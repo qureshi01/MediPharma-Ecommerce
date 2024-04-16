@@ -25,13 +25,13 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
-	@PostMapping("/register")
+	@PostMapping("/registerUser")
 	public ResponseEntity<String> register(@RequestBody User user) {
 		repo.save(user);
 		return new ResponseEntity<>("Data Added",HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/view")
+	@GetMapping("/viewUser")
 	public ResponseEntity<List<User>> viewAll() {
 	        List<User> users= service.getUsers();
 	        return new ResponseEntity<>(users,HttpStatus.OK);
