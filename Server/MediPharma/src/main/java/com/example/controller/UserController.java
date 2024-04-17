@@ -26,10 +26,10 @@ public class UserController {
 		return this.userResource.registerUser(userRequest);
 	}
 
-	@PostMapping("login")
-	public ResponseEntity<UserResponse> loginUser(@RequestBody UserLoginRequest loginRequest) {
-		return this.userResource.loginUser(loginRequest);
-	}
+//	@PostMapping("login")
+//	public ResponseEntity<UserResponse> loginUser(@RequestBody UserLoginRequest loginRequest) {
+//		return this.userResource.loginUser(loginRequest);
+//	}
 
 	
 	@GetMapping("fetch")
