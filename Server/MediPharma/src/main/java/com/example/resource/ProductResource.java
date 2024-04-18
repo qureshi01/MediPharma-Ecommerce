@@ -201,6 +201,19 @@ public class ProductResource {
 
 		return new ResponseEntity<ProductResponse>(response, HttpStatus.OK);
 	}
+	
+	
+	public void fetchProductImage(String productImageName, HttpServletResponse resp) {
+		Resource resource = storageService.load(productImageName);
+		if (resource != null) {
+			try (InputStream in = resource.getInputStream()) {
+				ServletOutputStream out = resp.getOutputStream();
+				FileCopyUtils.copy(in, out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 
 }

@@ -13,10 +13,14 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired 
 	private ProductDao productDao;
+	
+	@Autowired
+	private StorageService storageService;
 
 	@Override
-	public void addProduct(Product product, String productImage) {
-		String productImageName = productImage;
+	public void addProduct(Product product, MultipartFile productImage) {
+		
+		String productImageName = storageService.store(productImage);
 		
 		product.setImageName(productImageName);
 		
