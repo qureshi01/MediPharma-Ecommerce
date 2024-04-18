@@ -105,31 +105,31 @@ public class UserResource {
 //	}
 
 	public ResponseEntity<UserResponse> fetchUserById(Integer userId) {
-		UserResponse response = new UserResponse();
+		UserResponse userResponse = new UserResponse();
 
 		if (userId == null) {
-			response.setResponseMessage("User Id is missing!!");
-			response.setSuccess(false);
+			userResponse.setResponseMessage("User Id is missing!!");
+			userResponse.setSuccess(false);
 
-			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
 		}
 
 		Optional<User> optional = this.userDao.findById(userId);
 
 		if (optional.isEmpty()) {
-			response.setResponseMessage("User not found!!!");
-			response.setSuccess(false);
+			userResponse.setResponseMessage("User not found!!!");
+			userResponse.setSuccess(false);
 
-			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
 		}
 
 		User user = optional.get();
 
-		response.setUsers(Arrays.asList(user));
-		response.setResponseMessage("User Fetched Successful!!!");
-		response.setSuccess(true);
+		userResponse.setUsers(Arrays.asList(user));
+		userResponse.setResponseMessage("User Fetched Successful!!!");
+		userResponse.setSuccess(true);
 
-		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
+		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
 	}
 
 }
