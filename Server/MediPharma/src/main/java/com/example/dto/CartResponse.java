@@ -13,7 +13,7 @@ import lombok.ToString;
 
 public class CartResponse extends CommonApiResponse {
 	
-	private String totalCartPrice;
+	private double totalCartPrice;
 	
 	private List<CartDataResponse> cartData = new ArrayList();
 

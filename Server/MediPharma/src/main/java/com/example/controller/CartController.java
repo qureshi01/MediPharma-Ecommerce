@@ -27,11 +27,11 @@ public class CartController {
 		return this.cartResource.add(addToCartRequest);
 	}
 
-//	@GetMapping("fetch")
-//	public ResponseEntity<CartResponse> getMyCart(@RequestParam("userId") int userId) throws JsonProcessingException {
-//		return this.cartResource.fetchCart(userId);
-//	}
-
+	@GetMapping("fetch")
+	public ResponseEntity<CartResponse> getMyCart(@RequestParam("userId") int userId) throws JsonProcessingException {
+		return this.cartResource.getCartDetailsByUserId(userId);
+	}
+	
 	@GetMapping("remove")
 	public ResponseEntity<CommonApiResponse> removeCartItem(@RequestParam("cartId") int cartId)
 			throws JsonProcessingException {

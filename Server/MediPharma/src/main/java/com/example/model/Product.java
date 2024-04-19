@@ -18,8 +18,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 
 public class Product {
 	
@@ -29,7 +29,7 @@ public class Product {
     private String title;
 	private String description;
 	private int quantity;
-    private BigDecimal price;
+    private double price;
     private String imageName;
     
     @ManyToOne
