@@ -1,0 +1,52 @@
+.login-parent {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.bg-part,
+.form-part {
+  width: 50%;
+  height: 100%;
+}
+
+.login-bg{
+    width: 100%;
+    height: 100%;
+}
+
+.form-part{
+    display: flex;
+}
+.container {
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 2px 2px 8px 4px #dadada;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.inputContainer {
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
