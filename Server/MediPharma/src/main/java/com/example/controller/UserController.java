@@ -32,6 +32,11 @@ public class UserController {
 //	public ResponseEntity<UserResponse> loginUser(@RequestBody UserLoginRequest loginRequest) {
 //		return this.userResource.loginUser(loginRequest);
 //	}
+	
+	@GetMapping("deliveryperson/all")
+	public ResponseEntity<UserResponse> getAllDeliveryPersons() {
+		return this.userResource.getAllDeliveryPersons();
+	}
 
 	
 	@GetMapping("fetch")

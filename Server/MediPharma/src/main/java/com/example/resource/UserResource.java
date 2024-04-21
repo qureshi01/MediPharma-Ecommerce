@@ -1,12 +1,14 @@
 package com.example.resource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.example.dao.AddressDao;
 import com.example.dao.UserDao;
@@ -47,6 +49,13 @@ public class UserResource {
 			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
+		if (userRequest.getPhoneNo().length() != 10) {
+			response.setResponseMessage("Enter Valid Mobile No");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
 		Address address = new Address();
 		address.setCity(userRequest.getCity());
 		address.setPincode(userRequest.getPincode());
@@ -61,13 +70,16 @@ public class UserResource {
 			return new ResponseEntity<UserResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		String Password =userRequest.getPassword();
+		String encodedPassword = userRequest.getPassword();
 
 		User user = new User();
 		user.setAddress(addAddress);
 		user.setEmailId(userRequest.getEmailId());
-		user.setUname(userRequest.getUname());
-		user.setPassword(Password);
+		user.setFirstName(userRequest.getFirstName());
+		user.setLastName(userRequest.getLastName());
+		user.setPhoneNo(userRequest.getPhoneNo());
+		user.setPassword(encodedPassword);
+		user.setRole(userRequest.getRole());
 		User addUser = userDao.save(user);
 
 		if (addUser == null) {
@@ -103,33 +115,53 @@ public class UserResource {
 //        return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
 //		
 //	}
+	
+	public ResponseEntity<UserResponse> getAllDeliveryPersons() {
+		UserResponse response = new UserResponse();
+
+		List<User> deliveryPersons = this.userDao.findByRole("Delivery");
+
+		if (CollectionUtils.isEmpty(deliveryPersons)) {
+			response.setResponseMessage("No Delivery Person Found");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
+		}
+
+		response.setUsers(deliveryPersons);
+		response.setResponseMessage("Delivery Persons Fected Success!!!");
+		response.setSuccess(true);
+
+		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
+	}
 
 	public ResponseEntity<UserResponse> fetchUserById(Integer userId) {
-		UserResponse userResponse = new UserResponse();
+		UserResponse response = new UserResponse();
 
 		if (userId == null) {
-			userResponse.setResponseMessage("User Id is missing!!");
-			userResponse.setSuccess(false);
+			response.setResponseMessage("User Id is missing!!");
+			response.setSuccess(false);
 
-			return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		Optional<User> optional = this.userDao.findById(userId);
 
 		if (optional.isEmpty()) {
-			userResponse.setResponseMessage("User not found!!!");
-			userResponse.setSuccess(false);
+			response.setResponseMessage("User not found!!!");
+			response.setSuccess(false);
 
-			return new ResponseEntity<UserResponse>(userResponse, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		User user = optional.get();
 
-		userResponse.setUsers(Arrays.asList(user));
-		userResponse.setResponseMessage("User Fetched Successful!!!");
-		userResponse.setSuccess(true);
+		response.setUsers(Arrays.asList(user));
+		response.setResponseMessage("User Fetched Successful!!!");
+		response.setSuccess(true);
 
-		return new ResponseEntity<UserResponse>(userResponse, HttpStatus.OK);
+		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
 	}
+
 
 }

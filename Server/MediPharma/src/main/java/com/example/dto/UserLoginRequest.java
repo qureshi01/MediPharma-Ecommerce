@@ -1,44 +1,23 @@
 package com.example.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
 public class UserLoginRequest {
 	
 	private String emailId;
 	private String password;
+	private String role;
 
 	private String newPassword;  // for forget password
 
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getNewPassword() {
-		return newPassword;
-	}
-
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-
-	@Override
-	public String toString() {
-		return "UserLoginRequest [emailId=" + emailId + ", password=" + password + ", newPassword="
-				+ newPassword + "]";
-	}
 	
 	public static boolean validateLoginRequest(UserLoginRequest loginRequest) {
-		if (loginRequest.getEmailId() == null || loginRequest.getPassword() == null ) {
+		if (loginRequest.getEmailId() == null || loginRequest.getPassword() == null || loginRequest.getRole() == null) {
 			return false;
 		}
 

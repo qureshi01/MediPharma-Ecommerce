@@ -26,9 +26,15 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String uname;
+	private String firstName;
+	
+	private String lastName;
 	private String emailId;
 	private String password;
+	
+	private String phoneNo;
+	
+	private String role;
 	
 	@OneToOne
 	@JoinColumn(name = "address_id")
