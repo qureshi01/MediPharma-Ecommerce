@@ -14,7 +14,6 @@ public interface OrderDao extends JpaRepository<Orders, Integer> {
 	List<Orders> findByOrderId(String orderId);
 	List<Orders> findByUserIdAndProductId(int userId, int productId);
 	List<Orders> findByUserId(int userId);
-	List<Orders> findByDeliveryPersonId(int deliveryPersonId);
 	
 	
 

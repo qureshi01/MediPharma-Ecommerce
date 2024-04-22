@@ -41,6 +41,5 @@ public class Orders {
 
 	private String deliveryAssigned;
 
-	private int deliveryPersonId;
 
 }

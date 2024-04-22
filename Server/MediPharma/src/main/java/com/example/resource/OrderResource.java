@@ -21,6 +21,7 @@ import com.example.dto.CartResponse;
 import com.example.dto.CommonApiResponse;
 import com.example.dto.MyOrderResponse;
 import com.example.dto.ProductResponse;
+import com.example.dto.UpdateDeliveryStatusRequest;
 import com.example.dto.UserOrderResponse;
 import com.example.dto.UserResponse;
 import com.example.exception.OrderSaveFailedException;
@@ -90,24 +91,35 @@ public class OrderResource {
 	            order.setDeliveryTime(DeliveryTime.DEFAULT.value());
 	            order.setDeliveryAssigned(IsDeliveryAssigned.NO.value());
 
-	            //CommonApiResponse cartRemoveResponse = cartService.removeCartById(cartId);
+	            
 
 	            Orders savedOrder = orderDao.save(order);
 
 	            if (savedOrder == null) {
 	                throw new OrderSaveFailedException("Failed to save the Order");
 	            }
+	            
+//	            CommonApiResponse cartRemoveResponse = cartService.removeCartById(cart.getUserId());
+//	            if (!cartRemoveResponse.isSuccess()) {
+//	                // Handle the failure to remove item from the cart
+//	                response.setResponseMessage("Failed to remove item from the cart");
+//	                response.setSuccess(false);
+//	                return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//	            }
 	        }
 	    } catch (Exception e) {
 	        response.setResponseMessage("Failed to Order Products!!!");
 	        response.setSuccess(false);
 	        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	    
+	  
 
 	    response.setResponseMessage("Your Order Placed, Order Id: " + orderId);
 	    response.setSuccess(true);
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
 
 	
 	public ResponseEntity<UserOrderResponse> getMyOrder(int userId) {
@@ -139,10 +151,18 @@ public class OrderResource {
 	        }
 
 	        Product product = productResponse;
+	        User user = null;
+	        
+	        User userResponse = this.userService.getUserById(order.getUserId());
+	        
+	        user = userResponse;
 	        
 	        MyOrderResponse orderData = new MyOrderResponse();
 	        orderData.setUserId(order.getUserId());
 	        orderData.setOrderId(order.getOrderId());
+	        orderData.setUserName(user.getFirstName() + " " + user.getLastName());
+	        orderData.setUserPhone(user.getPhoneNo());
+			orderData.setAddress(user.getAddress());
 	        orderData.setProductDescription(product.getDescription());
 	        orderData.setProductName(product.getTitle());
 	        orderData.setProductImage(product.getImageName());
@@ -152,23 +172,6 @@ public class OrderResource {
 	        orderData.setDeliveryDate(order.getDeliveryDate() + " " + order.getDeliveryTime());
 	        orderData.setDeliveryStatus(order.getDeliveryStatus());
 	        orderData.setTotalPrice(order.getQuantity() * product.getPrice());
-	        
-	        if (order.getDeliveryPersonId() == 0) {
-	            orderData.setDeliveryPersonContact(DeliveryStatus.PENDING.value());
-	            orderData.setDeliveryPersonName(DeliveryStatus.PENDING.value());
-	        } else {
-	            User userResponse = this.userService.getUserById(order.getDeliveryPersonId());
-
-	            if (userResponse == null) {
-	                response.setResponseMessage("Delivery person not found for order id: " + order.getOrderId());
-	                response.setSuccess(false);
-	                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-	            }
-
-	            User deliveryPerson = userResponse;
-	            orderData.setDeliveryPersonContact(deliveryPerson.getPhoneNo());
-	            orderData.setDeliveryPersonName(deliveryPerson.getFirstName());
-	        }
 	        
 	        orderDatas.add(orderData);
 	    }
@@ -207,6 +210,7 @@ public class OrderResource {
 
 			Product product = productResponse;
 
+			
 			User user = null;
 
 			User userResponse = this.userService.getUserById(order.getUserId());
@@ -235,28 +239,6 @@ public class OrderResource {
 			orderData.setUserName(user.getFirstName() + " " + user.getLastName());
 			orderData.setUserPhone(user.getPhoneNo());
 			orderData.setAddress(user.getAddress());
-			if (order.getDeliveryPersonId() == 0) {
-				orderData.setDeliveryPersonContact(DeliveryStatus.PENDING.value());
-				orderData.setDeliveryPersonName(DeliveryStatus.PENDING.value());
-			}
-
-			else {
-				User deliveryPerson = null;
-
-				User deliveryPersonResponse = this.userService.getUserById(order.getDeliveryPersonId());
-
-				if (deliveryPersonResponse == null) {
-					response.setResponseMessage("user service is down!!!");
-					response.setSuccess(false);
-
-					return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
-				}
-
-				deliveryPerson = deliveryPersonResponse;
-
-				orderData.setDeliveryPersonContact(deliveryPerson.getPhoneNo());
-				orderData.setDeliveryPersonName(deliveryPerson.getFirstName());
-			}
 			orderDatas.add(orderData);
 
 		}
@@ -330,28 +312,88 @@ public class OrderResource {
 			orderData.setUserName(user.getFirstName() + " " + user.getLastName());
 			orderData.setUserPhone(user.getPhoneNo());
 			orderData.setAddress(user.getAddress());
-			if (order.getDeliveryPersonId() == 0) {
-				orderData.setDeliveryPersonContact(DeliveryStatus.PENDING.value());
-				orderData.setDeliveryPersonName(DeliveryStatus.PENDING.value());
+			orderDatas.add(orderData);
+
+		}
+
+		response.setOrders(orderDatas);
+		response.setResponseMessage("Order Fetched Successful!!");
+		response.setSuccess(true);
+
+		return new ResponseEntity<UserOrderResponse>(response, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<UserOrderResponse> updateOrderDeliveryStatus(UpdateDeliveryStatusRequest deliveryRequest) {
+		UserOrderResponse response = new UserOrderResponse();
+
+		if (deliveryRequest == null) {
+			response.setResponseMessage("bad request - missing request");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		List<Orders> orders = orderDao.findByOrderId(deliveryRequest.getOrderId());
+
+		if (CollectionUtils.isEmpty(orders)) {
+			response.setResponseMessage("Orders not found!!!");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		for (Orders order : orders) {
+			order.setDeliveryDate(deliveryRequest.getDeliveryDate());
+			order.setDeliveryStatus(deliveryRequest.getDeliveryStatus());
+			order.setDeliveryTime(deliveryRequest.getDeliveryTime());
+			orderDao.save(order);
+		}
+
+		List<Orders> userOrder = orderDao.findByOrderId(deliveryRequest.getOrderId());
+
+		List<MyOrderResponse> orderDatas = new ArrayList<>();
+
+		for (Orders order : userOrder) {
+
+			Product productResponse = productService.getProductById(order.getProductId());
+
+			if (productResponse == null) {
+				response.setResponseMessage("product service is down!!!");
+				response.setSuccess(false);
+
+				return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
 			}
 
-			else {
-				User deliveryPerson = null;
+			Product product = productResponse;
 
-				User deliveryPersonResponse = this.userService.getUserById(order.getDeliveryPersonId());
+			User user = null;
 
-				if (deliveryPersonResponse == null) {
-					response.setResponseMessage("user service is down!!!");
-					response.setSuccess(false);
+			User userResponse = this.userService.getUserById(order.getUserId());
 
-					return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
-				}
+			if (userResponse == null) {
+				response.setResponseMessage("user service is down!!!");
+				response.setSuccess(false);
 
-				deliveryPerson = deliveryPersonResponse;
-
-				orderData.setDeliveryPersonContact(deliveryPerson.getPhoneNo());
-				orderData.setDeliveryPersonName(deliveryPerson.getFirstName());
+				return new ResponseEntity<UserOrderResponse>(response, HttpStatus.BAD_REQUEST);
 			}
+
+			user = userResponse;
+
+			MyOrderResponse orderData = new MyOrderResponse();
+			orderData.setOrderId(order.getOrderId());
+			orderData.setProductDescription(product.getDescription());
+			orderData.setProductName(product.getTitle());
+			orderData.setProductImage(product.getImageName());
+			orderData.setQuantity(order.getQuantity());
+			orderData.setOrderDate(order.getOrderDate());
+			orderData.setProductId(product.getId());
+			orderData.setDeliveryDate(order.getDeliveryDate() + " " + order.getDeliveryTime());
+			orderData.setDeliveryStatus(order.getDeliveryStatus());
+			orderData.setTotalPrice(order.getQuantity() * product.getPrice());
+			orderData.setUserId(user.getId());
+			orderData.setUserName(user.getFirstName() + " " + user.getLastName());
+			orderData.setUserPhone(user.getPhoneNo());
+			orderData.setAddress(user.getAddress());
 			orderDatas.add(orderData);
 
 		}

@@ -18,6 +18,5 @@ public class UpdateDeliveryStatusRequest {
 	
 	private String deliveryDate;
 	
-	private int deliveryId;  // for assigning Delivery Person for Order
 
 }

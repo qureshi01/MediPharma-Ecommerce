@@ -38,8 +38,5 @@ public class MyOrderResponse {
 	
 	private String deliveryStatus;
 	
-	private String deliveryPersonName;
-	
-	private String deliveryPersonContact;
 
 }
