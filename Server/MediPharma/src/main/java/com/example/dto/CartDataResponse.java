@@ -11,6 +11,8 @@ import lombok.ToString;
 public class CartDataResponse {
 	
 	private int cartId;
+	
+	private int userId;
 
 	private int productId;
 

@@ -100,6 +100,7 @@ public class CartResource {
             // Create cart data response
             CartDataResponse cartData = new CartDataResponse();
             cartData.setCartId(cart.getId());
+            cartData.setUserId(cart.getUserId());
             cartData.setProductDescription(product.getDescription());
             cartData.setProductName(product.getTitle());
             cartData.setProductImage(product.getImageName());
