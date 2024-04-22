@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dto.AddUserRequest;
-import com.example.dto.UserLoginRequest;
 import com.example.dto.UserResponse;
 import com.example.resource.UserResource;
 
@@ -32,11 +31,6 @@ public class UserController {
 //	public ResponseEntity<UserResponse> loginUser(@RequestBody UserLoginRequest loginRequest) {
 //		return this.userResource.loginUser(loginRequest);
 //	}
-	
-	@GetMapping("deliveryperson/all")
-	public ResponseEntity<UserResponse> getAllDeliveryPersons() {
-		return this.userResource.getAllDeliveryPersons();
-	}
 
 	
 	@GetMapping("fetch")

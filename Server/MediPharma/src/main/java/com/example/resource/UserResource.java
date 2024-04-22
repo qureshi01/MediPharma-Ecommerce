@@ -1,19 +1,16 @@
 package com.example.resource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import com.example.dao.AddressDao;
 import com.example.dao.UserDao;
 import com.example.dto.AddUserRequest;
-import com.example.dto.UserLoginRequest;
 import com.example.dto.UserResponse;
 import com.example.exception.UserSaveFailedException;
 import com.example.model.Address;
@@ -116,25 +113,7 @@ public class UserResource {
 //		
 //	}
 	
-	public ResponseEntity<UserResponse> getAllDeliveryPersons() {
-		UserResponse response = new UserResponse();
-
-		List<User> deliveryPersons = this.userDao.findByRole("Delivery");
-
-		if (CollectionUtils.isEmpty(deliveryPersons)) {
-			response.setResponseMessage("No Delivery Person Found");
-			response.setSuccess(false);
-
-			return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
-		}
-
-		response.setUsers(deliveryPersons);
-		response.setResponseMessage("Delivery Persons Fected Success!!!");
-		response.setSuccess(true);
-
-		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
-	}
-
+	
 	public ResponseEntity<UserResponse> fetchUserById(Integer userId) {
 		UserResponse response = new UserResponse();
 

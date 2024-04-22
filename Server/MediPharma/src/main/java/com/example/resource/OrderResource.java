@@ -16,14 +16,10 @@ import org.springframework.util.CollectionUtils;
 import com.example.dao.CartDao;
 import com.example.dao.OrderDao;
 import com.example.dao.UserDao;
-import com.example.dto.CartDataResponse;
-import com.example.dto.CartResponse;
 import com.example.dto.CommonApiResponse;
 import com.example.dto.MyOrderResponse;
-import com.example.dto.ProductResponse;
 import com.example.dto.UpdateDeliveryStatusRequest;
 import com.example.dto.UserOrderResponse;
-import com.example.dto.UserResponse;
 import com.example.exception.OrderSaveFailedException;
 import com.example.model.Cart;
 import com.example.model.Orders;
@@ -32,7 +28,6 @@ import com.example.model.User;
 import com.example.service.ProductServiceImpl;
 import com.example.utility.Constants.DeliveryStatus;
 import com.example.utility.Constants.DeliveryTime;
-import com.example.utility.Constants.IsDeliveryAssigned;
 import com.example.utility.Helper;
 
 import jakarta.transaction.Transactional;
@@ -89,7 +84,6 @@ public class OrderResource {
 	            order.setDeliveryDate(DeliveryStatus.PENDING.value());
 	            order.setDeliveryStatus(DeliveryStatus.PENDING.value());
 	            order.setDeliveryTime(DeliveryTime.DEFAULT.value());
-	            order.setDeliveryAssigned(IsDeliveryAssigned.NO.value());
 
 	            
 

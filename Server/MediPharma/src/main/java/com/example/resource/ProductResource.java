@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.dao.CategoryDao;
 import com.example.dao.ProductDao;

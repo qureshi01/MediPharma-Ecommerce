@@ -41,20 +41,5 @@ public class Constants {
 	     
 	}
 	
-	public enum IsDeliveryAssigned {
-		YES("Yes"),
-		NO("No");
-		
-		private String isDeliveryAssigned;
-
-	    private IsDeliveryAssigned(String isDeliveryAssigned) {
-	      this.isDeliveryAssigned = isDeliveryAssigned;
-	    }
-
-	    public String value() {
-	      return this.isDeliveryAssigned;
-	    }
-	     
-	}
 
 }

@@ -39,7 +39,6 @@ public class Orders {
 
 	private String deliveryTime; // evening, afternoon....
 
-	private String deliveryAssigned;
 
 
 }
