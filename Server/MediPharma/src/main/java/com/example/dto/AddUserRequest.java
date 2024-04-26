@@ -26,8 +26,6 @@ public class AddUserRequest {
 	private String city;
 
 	private int pincode;
-	
-	private String role;
 
 
 	
@@ -39,7 +37,7 @@ public class AddUserRequest {
 
 		if (request.getFirstName() == null || request.getLastName() == null || request.getEmailId() == null
 				|| request.getPassword() == null || request.getPhoneNo() == null || request.getStreet() == null
-				|| request.getCity() == null || request.getRole() == null) {
+				|| request.getCity() == null ) {
 			return false;
 		}
 		// Additional validation logic if needed
