@@ -105,25 +105,22 @@ public class ProductResource {
 	}
 
 	public ResponseEntity<ProductResponse> getAllProducts() {
-		ProductResponse response = new ProductResponse();
+	    ProductResponse response = new ProductResponse();
 
-		List<Product> products = new ArrayList<Product>();
+	    List<Product> products = productDao.findAll();
 
-		products = productDao.findAll();
+	    if (CollectionUtils.isEmpty(products)) {
+	        response.setResponseMessage("Products not found!!!");
+	        response.setSuccess(false);
+	    } else {
+	        response.setProducts(products);
+	        response.setResponseMessage("Product Fetched Successful!!!");
+	        response.setSuccess(true);
+	    }
 
-		if (CollectionUtils.isEmpty(products)) {
-			response.setResponseMessage("Products not found!!!");
-			response.setSuccess(false);
-
-			return new ResponseEntity<ProductResponse>(response, HttpStatus.OK);
-		}
-
-		response.setProducts(products);
-		response.setResponseMessage("Product Fetched Successful!!!");
-		response.setSuccess(true);
-
-		return new ResponseEntity<ProductResponse>(response, HttpStatus.OK);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
 
 	public ResponseEntity<ProductResponse> getProductById(int productId) {
 		ProductResponse response = new ProductResponse();

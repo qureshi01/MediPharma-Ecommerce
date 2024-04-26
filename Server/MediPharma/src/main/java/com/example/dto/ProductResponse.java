@@ -5,20 +5,8 @@ import java.util.List;
 
 import com.example.model.Product;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
-
 public class ProductResponse extends CommonApiResponse {
 	
-	  	private int id;
-	    private String title;
-	    private String description;
-	    private double price;
-	    private int quantity;
-	    private String imageName;
 	
 	private List<Product> products = new ArrayList<>();
 

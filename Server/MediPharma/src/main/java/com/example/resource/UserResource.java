@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import com.example.dao.AddressDao;
 import com.example.dao.UserDao;
 import com.example.dto.AddUserRequest;
+import com.example.dto.UserLoginRequest;
 import com.example.dto.UserResponse;
 import com.example.exception.UserSaveFailedException;
 import com.example.model.Address;
@@ -76,7 +77,6 @@ public class UserResource {
 		user.setLastName(userRequest.getLastName());
 		user.setPhoneNo(userRequest.getPhoneNo());
 		user.setPassword(encodedPassword);
-		user.setRole(userRequest.getRole());
 		User addUser = userDao.save(user);
 
 		if (addUser == null) {
@@ -90,29 +90,37 @@ public class UserResource {
 		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
 	}
 
-//	public ResponseEntity<UserResponse> loginUser(UserLoginRequest loginRequest) {
-//		UserResponse response = new UserResponse();
-//
-//		if (loginRequest == null) {
-//			response.setResponseMessage("bad request - missing request");
-//			response.setSuccess(false);
-//
-//			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
-//		}
-//
-//		if (!UserLoginRequest.validateLoginRequest(loginRequest)) {
-//			response.setResponseMessage("bad request - missing input");
-//			response.setSuccess(false);
-//
-//			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		// Implementation of login logic goes here
-//        
-//        return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
-//		
-//	}
-	
+	public ResponseEntity<UserResponse> loginUser(UserLoginRequest loginRequest) {
+		UserResponse response = new UserResponse();
+
+		if (loginRequest == null) {
+			response.setResponseMessage("bad request - missing request");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		if (!UserLoginRequest.validateLoginRequest(loginRequest)) {
+			response.setResponseMessage("bad request - missing input");
+			response.setSuccess(false);
+
+			return new ResponseEntity<UserResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		// Implementation of login logic goes here
+		
+		  User user = userDao.findByEmailId(loginRequest.getEmailId());
+	        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
+	            response.setResponseMessage("Login successful");
+	            response.setSuccess(true);
+	            return new ResponseEntity<>(response, HttpStatus.OK);
+	        } else {
+	            response.setResponseMessage("Invalid username or password");
+	            response.setSuccess(false);
+	            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+	        }
+	    }
+   
 	
 	public ResponseEntity<UserResponse> fetchUserById(Integer userId) {
 		UserResponse response = new UserResponse();

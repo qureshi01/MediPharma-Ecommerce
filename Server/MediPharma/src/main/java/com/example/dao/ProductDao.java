@@ -11,8 +11,6 @@ import com.example.model.Product;
 public interface ProductDao extends JpaRepository<Product, Integer> {
 
 	List<Product> findByCategoryId(int category);
-	
-	
-	
+		
 	
 }
