@@ -11,12 +11,13 @@ public class UserLoginRequest {
 	
 	private String emailId;
 	private String password;
+	private String role;
 
 	private String newPassword;  // for forget password
 
 	
 	public static boolean validateLoginRequest(UserLoginRequest loginRequest) {
-		if (loginRequest.getEmailId() == null || loginRequest.getPassword() == null) {
+		if (loginRequest.getEmailId() == null || loginRequest.getPassword() == null || loginRequest.getRole() == null) {
 			return false;
 		}
 

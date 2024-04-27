@@ -34,6 +34,8 @@ public class User {
 	
 	private String phoneNo;
 	
+	private String role;
+	
 	
 	@OneToOne
 	@JoinColumn(name = "address_id")

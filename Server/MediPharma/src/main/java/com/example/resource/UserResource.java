@@ -77,6 +77,7 @@ public class UserResource {
 		user.setLastName(userRequest.getLastName());
 		user.setPhoneNo(userRequest.getPhoneNo());
 		user.setPassword(encodedPassword);
+		user.setRole(userRequest.getRole());
 		User addUser = userDao.save(user);
 
 		if (addUser == null) {
