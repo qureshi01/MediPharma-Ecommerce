@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import com.example.dao.AddressDao;
@@ -28,6 +30,9 @@ public class UserResource {
 
 	@Autowired
 	private AddressDao addressDao;
+	
+	@Autowired
+    private JavaMailSender mailSender;
 	
 
 	public ResponseEntity<UserResponse> registerUser(AddUserRequest userRequest) {
@@ -87,8 +92,18 @@ public class UserResource {
 		response.setUsers(Arrays.asList(addUser));
 		response.setResponseMessage("User Registered Successful");
 		response.setSuccess(true);
+		
+		SimpleMailMessage message = new SimpleMailMessage();
+		String from = "sender@gmail.com";
+		message.setFrom(from);message.setTo(user.getEmailId());
+				message.setSubject("Registration Succesfull");
+				message.setText("User Registered Succesfully");
+				 
+				mailSender.send(message);
 
 		return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
+		
+		
 	}
 
 	public ResponseEntity<UserResponse> loginUser(UserLoginRequest loginRequest) {

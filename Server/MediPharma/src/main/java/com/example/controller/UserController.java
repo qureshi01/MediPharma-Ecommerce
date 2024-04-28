@@ -2,6 +2,7 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,9 @@ public class UserController {
 	
 	@Autowired
 	UserResource userResource;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@PostMapping("register")
 	public ResponseEntity<UserResponse> registerUser(@RequestBody AddUserRequest userRequest) {
