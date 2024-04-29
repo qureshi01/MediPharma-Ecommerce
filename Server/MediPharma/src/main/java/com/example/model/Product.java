@@ -30,7 +30,8 @@ public class Product {
 	private String description;
 	private int quantity;
     private double price;
-    private String imageName;
+    private String image;
+    private int disc_price;
     
     @ManyToOne
     @JoinColumn(name ="categoryId")

@@ -1,99 +1,27 @@
 package com.example.dto;
 
-
-
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.example.model.Product;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@ToString
 public class ProductAddRequest {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+
     private String title;
-	private String description;
-	private int quantity;
+    private String description;
+    private int quantity;
     private double price;
+    private int disc_price;
     private int categoryId;
-    private MultipartFile image;
-	
-    
-    
-	public int getId() {
-		return id;
-	}
+    private String image;
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public MultipartFile getImage() {
-		return image;
-	}
-
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductAddRequest [id=" + id + ", title=" + title + ", description=" + description + ", quantity="
-				+ quantity + ", price=" + price + ", categoryId=" + categoryId + ", image=" + image + "]";
-	}
-	
-	public static Product toEntity(ProductAddRequest dto) {
-		Product entity=new Product();
-		BeanUtils.copyProperties(dto, entity, "image", "categoryId");		
-		return entity;
-	}
-
-	public static boolean validateProduct(ProductAddRequest request) {
+    public static boolean validateProduct(ProductAddRequest request) {
         if (request.getTitle() == null || request.getDescription() == null || request.getPrice() == 0 ||
             request.getImage() == null || request.getQuantity() < 0 || request.getCategoryId() == 0) {
             return false;
@@ -105,5 +33,12 @@ public class ProductAddRequest {
     }
 
     
-
+    public static Product toEntity(ProductAddRequest dto) {
+        if (dto == null) {
+            return null;
+        }
+        Product entity = new Product();
+        BeanUtils.copyProperties(dto, entity);
+        return entity;
+    }
 }

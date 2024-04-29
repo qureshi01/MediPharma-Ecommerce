@@ -103,7 +103,7 @@ public class CartResource {
             cartData.setUserId(cart.getUserId());
             cartData.setProductDescription(product.getDescription());
             cartData.setProductName(product.getTitle());
-            cartData.setProductImage(product.getImageName());
+            cartData.setProductImage(product.getImage());
             cartData.setQuantity(cart.getQuantity());
             cartData.setProductId(product.getId());
             cartDatas.add(cartData);

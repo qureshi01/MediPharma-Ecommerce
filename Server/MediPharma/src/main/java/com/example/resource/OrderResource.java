@@ -159,7 +159,7 @@ public class OrderResource {
 			orderData.setAddress(user.getAddress());
 	        orderData.setProductDescription(product.getDescription());
 	        orderData.setProductName(product.getTitle());
-	        orderData.setProductImage(product.getImageName());
+	        orderData.setProductImage(product.getImage());
 	        orderData.setQuantity(order.getQuantity());
 	        orderData.setOrderDate(order.getOrderDate());
 	        orderData.setProductId(product.getId());
@@ -222,7 +222,7 @@ public class OrderResource {
 			orderData.setOrderId(order.getOrderId());
 			orderData.setProductDescription(product.getDescription());
 			orderData.setProductName(product.getTitle());
-			orderData.setProductImage(product.getImageName());
+			orderData.setProductImage(product.getImage());
 			orderData.setQuantity(order.getQuantity());
 			orderData.setOrderDate(order.getOrderDate());
 			orderData.setProductId(product.getId());
@@ -295,7 +295,7 @@ public class OrderResource {
 			orderData.setOrderId(order.getOrderId());
 			orderData.setProductDescription(product.getDescription());
 			orderData.setProductName(product.getTitle());
-			orderData.setProductImage(product.getImageName());
+			orderData.setProductImage(product.getImage());
 			orderData.setQuantity(order.getQuantity());
 			orderData.setOrderDate(order.getOrderDate());
 			orderData.setProductId(product.getId());
@@ -377,7 +377,7 @@ public class OrderResource {
 			orderData.setOrderId(order.getOrderId());
 			orderData.setProductDescription(product.getDescription());
 			orderData.setProductName(product.getTitle());
-			orderData.setProductImage(product.getImageName());
+			orderData.setProductImage(product.getImage());
 			orderData.setQuantity(order.getQuantity());
 			orderData.setOrderDate(order.getOrderDate());
 			orderData.setProductId(product.getId());

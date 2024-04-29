@@ -1,7 +1,5 @@
 package com.example.resource;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.FileCopyUtils;
 
 import com.example.dao.CategoryDao;
 import com.example.dao.ProductDao;
@@ -22,11 +19,7 @@ import com.example.dto.ProductResponse;
 import com.example.model.Category;
 import com.example.model.Product;
 import com.example.service.ProductService;
-import com.example.utility.StorageService;
 
-import org.springframework.core.io.Resource;
-import jakarta.servlet.ServletOutputStream;
-import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class ProductResource {
@@ -40,8 +33,6 @@ public class ProductResource {
 	@Autowired
 	private CategoryDao categoryDao;
 
-	@Autowired
-	private StorageService storageService;
 
 	public ResponseEntity<CommonApiResponse> addProduct(ProductAddRequest productDto) {
 		CommonApiResponse response = new CommonApiResponse();
@@ -88,7 +79,7 @@ public class ProductResource {
 		product.setCategory(category);
 
 		try {
-			productService.addProduct(product, productDto.getImage());
+			productService.addProduct(product);
 
 			response.setResponseMessage("Product Added Successful!!!");
 			response.setSuccess(true);
@@ -103,7 +94,8 @@ public class ProductResource {
 
 		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
+	
+	
 	public ResponseEntity<ProductResponse> getAllProducts() {
 	    ProductResponse response = new ProductResponse();
 
@@ -199,17 +191,6 @@ public class ProductResource {
 	}
 	
 	
-	public void fetchProductImage(String productImageName, HttpServletResponse resp) {
-		Resource resource = storageService.load(productImageName);
-		if (resource != null) {
-			try (InputStream in = resource.getInputStream()) {
-				ServletOutputStream out = resp.getOutputStream();
-				FileCopyUtils.copy(in, out);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 
-}

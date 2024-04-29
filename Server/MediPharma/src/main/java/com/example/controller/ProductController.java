@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,6 @@ import com.example.dto.ProductAddRequest;
 import com.example.dto.ProductResponse;
 import com.example.resource.ProductResource;
 
-import jakarta.servlet.http.HttpServletResponse;
 
 
 
@@ -29,7 +28,7 @@ public class ProductController {
 	private ProductResource productResource;
 
 	@PostMapping("add")
-	public ResponseEntity<CommonApiResponse> addProduct(ProductAddRequest productDto) {
+	public ResponseEntity<CommonApiResponse> addProduct(@RequestBody ProductAddRequest productDto) {
 		return this.productResource.addProduct(productDto);
 	}
 
@@ -48,10 +47,6 @@ public class ProductController {
 		return this.productResource.getProductsByCategories(categoryId);
 	}
 	
-	@GetMapping(value = "image/{productImageName}", produces = "image/*")
-	public void fetchProductImage(@PathVariable("productImageName") String productImageName, HttpServletResponse resp) {
-		this.productResource.fetchProductImage(productImageName, resp);
-	}
 
 	
 	
