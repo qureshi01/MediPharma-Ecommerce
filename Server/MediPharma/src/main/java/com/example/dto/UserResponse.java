@@ -18,6 +18,8 @@ public class UserResponse extends CommonApiResponse{
 	private String responseMessage;
     private boolean success;
     private String role;
+    private String firstName;
+    private int userId;
 	
 	private List<User> users = new ArrayList<>();
 

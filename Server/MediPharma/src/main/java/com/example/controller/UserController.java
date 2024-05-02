@@ -24,8 +24,6 @@ public class UserController {
 	@Autowired
 	UserResource userResource;
 	
-	@Autowired
-	private JavaMailSender mailSender;
 	
 	@PostMapping("register")
 	public ResponseEntity<UserResponse> registerUser(@RequestBody AddUserRequest userRequest) {

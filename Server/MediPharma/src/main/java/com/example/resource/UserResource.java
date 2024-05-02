@@ -104,6 +104,8 @@ public class UserResource {
 	        User savedUser = userDao.save(user);
 	        response.setUsers(Arrays.asList(savedUser));
 	        response.setRole(savedUser.getRole());
+	        response.setFirstName(savedUser.getFirstName());
+	        response.setUserId(savedUser.getId());
 	        response.setResponseMessage("User registered successfully");
 	        response.setSuccess(true);
 	        
@@ -135,6 +137,8 @@ public class UserResource {
 	        response.setResponseMessage("Login successful");
 	        response.setSuccess(true);
 	        response.setRole(user.getRole()); // Set the user's role in the response
+	        response.setFirstName(user.getFirstName());
+	        response.setUserId(user.getId());
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 	    } else {
 	        response.setResponseMessage("Invalid username or password");

@@ -35,38 +35,78 @@ public class CartResource {
 	ObjectMapper objectMapper = new ObjectMapper();
 
 	public ResponseEntity<CommonApiResponse> add(AddToCartRequest addToCartRequest) {
-		CommonApiResponse response = new CommonApiResponse();
+	    CommonApiResponse response = new CommonApiResponse();
 
-		if (addToCartRequest == null) {
-			response.setResponseMessage("bad request - missing request");
-			response.setSuccess(false);
+	    if (addToCartRequest == null) {
+	        response.setResponseMessage("bad request - missing request");
+	        response.setSuccess(false);
+	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	    }
 
-			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
-		}
+	    if (!AddToCartRequest.validateAddToCartRequest(addToCartRequest)) {
+	        response.setResponseMessage("bad request - missing field");
+	        response.setSuccess(false);
+	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	    }
 
-		if (!AddToCartRequest.validateAddToCartRequest(addToCartRequest)) {
-			response.setResponseMessage("bad request - missing field");
-			response.setSuccess(false);
+	    // Check if a cart with the same productId and userId already exists
+	    Cart existingCart = cartDao.findByProductIdAndUserId(addToCartRequest.getProductId(), addToCartRequest.getUserId());
 
-			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
-		}
+	    if (existingCart != null) {
+	        // If it exists, update its quantity
+	        existingCart.setQuantity(existingCart.getQuantity() + addToCartRequest.getQuantity());
+	        cartDao.save(existingCart);
+	        response.setResponseMessage("Cart quantity updated successfully!");
+	        response.setSuccess(true);
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } else {
+	        // If it doesn't exist, create a new Cart entry
+	        Cart cart = new Cart();
+	        cart.setProductId(addToCartRequest.getProductId());
+	        cart.setQuantity(addToCartRequest.getQuantity());
+	        cart.setUserId(addToCartRequest.getUserId());
 
-		Cart cart = new Cart();
-		cart.setProductId(addToCartRequest.getProductId());
-		cart.setQuantity(addToCartRequest.getQuantity());
-		cart.setUserId(addToCartRequest.getUserId());
+	        Cart addedCart = cartDao.save(cart);
 
-		Cart addedCart = cartDao.save(cart);
+	        if (addedCart == null) {
+	            throw new CartSaveFailedException("Failed to Save the Cart");
+	        }
 
-		if (addedCart == null) {
-			throw new CartSaveFailedException("Failed to Save the Cart");
-		}
-
-		response.setResponseMessage("Cart added successful!!!");
-		response.setSuccess(true);
-
-		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
+	        response.setResponseMessage("Cart added successfully!");
+	        response.setSuccess(true);
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    }
+	    
 	}
+	
+	 public ResponseEntity<CommonApiResponse> removeCartItem(int userId, int productId, int quantity) {
+	        CommonApiResponse response = new CommonApiResponse();
+
+	        try {
+	            Cart cartItem = cartDao.findByProductIdAndUserId(productId, userId);
+	            if (cartItem != null) {
+	                int remainingQuantity = cartItem.getQuantity() - quantity;
+	                if (remainingQuantity > 0) {
+	                    cartItem.setQuantity(remainingQuantity);
+	                    cartDao.save(cartItem);
+	                } else {
+	                    cartDao.delete(cartItem);
+	                }
+	                response.setResponseMessage("Cart item removed successfully");
+	                response.setSuccess(true);
+	                return ResponseEntity.ok().body(response);
+	            } else {
+	                response.setResponseMessage("Cart item not found");
+	                response.setSuccess(false);
+	                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	            }
+	        } catch (Exception e) {
+	            response.setResponseMessage("Failed to remove cart item");
+	            response.setSuccess(false);
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	        }
+	    }
+
 	
 	public ResponseEntity<CartResponse> getCartDetailsByUserId(int userId) {
         CartResponse response = new CartResponse();

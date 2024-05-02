@@ -10,6 +10,8 @@ import javax.management.ServiceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -113,7 +115,6 @@ public class OrderResource {
 	    response.setSuccess(true);
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
-
 
 	
 	public ResponseEntity<UserOrderResponse> getMyOrder(int userId) {
