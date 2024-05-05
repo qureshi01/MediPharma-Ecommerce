@@ -16,7 +16,6 @@ import lombok.ToString;
 public class CartResponse extends CommonApiResponse {
 	
 	private CartData cartData;
-	private boolean activeCart;
 
 
 }

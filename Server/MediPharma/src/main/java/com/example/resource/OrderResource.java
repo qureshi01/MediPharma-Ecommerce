@@ -29,6 +29,7 @@ import com.example.model.Cart;
 import com.example.model.Orders;
 import com.example.model.Product;
 import com.example.model.User;
+import com.example.service.CartService;
 import com.example.service.ProductServiceImpl;
 import com.example.utility.Constants.DeliveryStatus;
 import com.example.utility.Constants.DeliveryTime;
@@ -49,76 +50,74 @@ public class OrderResource {
 
 	@Autowired
 	private CartDao cartService;
+	
+	@Autowired
+	private CartService cartDao;
 
 	@Autowired
 	private ProductServiceImpl productService;
 	
-	public ResponseEntity<CommonApiResponse> customerOrder(int userId) throws ServiceNotFoundException {
-	    CommonApiResponse response = new CommonApiResponse();
-	    
-	    if (userId == 0) {
-	        response.setResponseMessage("bad request - missing field");
-	        response.setSuccess(false);
-	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-	    }
+	public ResponseEntity<CommonApiResponse> customerOrder(int userId) {
+        CommonApiResponse response = new CommonApiResponse();
 
-	    String orderId = Helper.getAlphaNumericOrderId();
+        if (userId == 0) {
+            response.setResponseMessage("bad request - missing field");
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
 
-	    // Assuming the cartService returns a List<Cart>
-	    List<Cart> carts = this.cartService.getCartByUserId(userId);
+        String orderId = Helper.getAlphaNumericOrderId();
 
-	    if (carts == null || carts.isEmpty()) {
-	        response.setResponseMessage("Your Cart is Empty!!!");
-	        response.setSuccess(false);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+        // Assuming the cartService returns a List<Cart>
+        List<Cart> carts = this.cartService.getCartByUserId(userId);
 
-	    LocalDateTime currentDateTime = LocalDateTime.now();
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-	    String formatDateTime = currentDateTime.format(formatter);
+        if (carts == null || carts.isEmpty()) {
+            response.setResponseMessage("Your Cart is Empty!!!");
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
 
-	    try {
-	        for (Cart cart : carts) {
-	            Orders order = new Orders();
-	            order.setOrderId(orderId);
-	            order.setUserId(userId);
-	            order.setProductId(cart.getProductId());
-	            order.setQuantity(cart.getQuantity());
-	            order.setOrderDate(formatDateTime);
-	            order.setDeliveryDate(DeliveryStatus.PENDING.value());
-	            order.setDeliveryStatus(DeliveryStatus.PENDING.value());
-	            order.setDeliveryTime(DeliveryTime.DEFAULT.value());
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        String formatDateTime = currentDateTime.format(formatter);
 
-	            
+        try {
+            for (Cart cart : carts) {
+                Orders order = new Orders();
+                order.setOrderId(orderId);
+                order.setUserId(userId);
+                order.setProductId(cart.getProductId());
+                order.setQuantity(cart.getQuantity());
+                order.setOrderDate(formatDateTime);
+                order.setDeliveryDate(DeliveryStatus.PENDING.value());
+                order.setDeliveryStatus(DeliveryStatus.PENDING.value());
+                order.setDeliveryTime(DeliveryTime.DEFAULT.value());
 
-	            Orders savedOrder = orderDao.save(order);
+                Orders savedOrder = orderDao.save(order);
 
-	            if (savedOrder == null) {
-	                throw new OrderSaveFailedException("Failed to save the Order");
-	            }
-	            
-//	            CommonApiResponse cartRemoveResponse = cartService.removeCartById(cart.getUserId());
-//	            if (!cartRemoveResponse.isSuccess()) {
-//	                // Handle the failure to remove item from the cart
-//	                response.setResponseMessage("Failed to remove item from the cart");
-//	                response.setSuccess(false);
-//	                return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-//	            }
-	        }
-	    } catch (Exception e) {
-	        response.setResponseMessage("Failed to Order Products!!!");
-	        response.setSuccess(false);
-	        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
-	    
-	  
-
-	    response.setResponseMessage("Your Order Placed, Order Id: " + orderId);
-	    response.setSuccess(true);
-	    
-	    
-	    return new ResponseEntity<>(response, HttpStatus.OK);
-	}
+                if (savedOrder == null) {
+                    throw new OrderSaveFailedException("Failed to save the Order");
+                }
+                
+                CommonApiResponse cartRemoveResponse = cartDao.deleteById(cart.getId());
+                if (cartRemoveResponse != null && cartRemoveResponse.isSuccess()) {
+                    // Cart item removed successfully
+                } else {
+                    // Handle the failure to remove item from the cart
+                    response.setResponseMessage("Failed to remove item from the cart");
+                    response.setSuccess(false);
+                    return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+            }
+            response.setResponseMessage("Order placed successfully");
+            response.setSuccess(true);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            response.setResponseMessage("Failed to Order Products: " + e.getMessage());
+            response.setSuccess(false);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 	
 	public ResponseEntity<UserOrderResponse> getMyOrder(int userId) {

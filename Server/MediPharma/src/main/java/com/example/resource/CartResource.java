@@ -113,7 +113,6 @@ public class CartResource {
 	    }
 	}
 
-	
 	 public ResponseEntity<CartResponse> getCartDetailsByUserId(int userId) {
 		    CartResponse response = new CartResponse();
 		    CartData cartData = new CartData();
@@ -169,7 +168,6 @@ public class CartResource {
 		    // Set CartData object to the response
 		    response.setCartData(cartData);
 		    response.setSuccess(true);
-		    response.setActiveCart(true);
 		    response.setResponseMessage("Fetched Cart Successfully");
 		    return new ResponseEntity<>(response, HttpStatus.OK);
 		}
