@@ -6,6 +6,7 @@ public class CommonApiResponse {
 
 	private boolean isSuccess;
 
+
 	public String getResponseMessage() {
 		return responseMessage;
 	}

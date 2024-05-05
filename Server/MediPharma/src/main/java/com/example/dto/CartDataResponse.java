@@ -15,6 +15,10 @@ public class CartDataResponse {
 	private int userId;
 
 	private int productId;
+	
+	private double price;
+	
+	private double totalPrice;
 
 	private String productName;
 

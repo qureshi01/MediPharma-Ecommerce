@@ -3,6 +3,8 @@ package com.example.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.model.Cart;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -13,8 +15,8 @@ import lombok.ToString;
 
 public class CartResponse extends CommonApiResponse {
 	
-	private double totalCartPrice;
-	
-	private List<CartDataResponse> cartData = new ArrayList();
+	private CartData cartData;
+	private boolean activeCart;
+
 
 }

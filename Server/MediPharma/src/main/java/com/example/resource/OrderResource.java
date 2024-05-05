@@ -18,6 +18,8 @@ import org.springframework.util.CollectionUtils;
 import com.example.dao.CartDao;
 import com.example.dao.OrderDao;
 import com.example.dao.UserDao;
+import com.example.dto.CartData;
+import com.example.dto.CartResponse;
 import com.example.dto.CommonApiResponse;
 import com.example.dto.MyOrderResponse;
 import com.example.dto.UpdateDeliveryStatusRequest;
@@ -53,7 +55,7 @@ public class OrderResource {
 	
 	public ResponseEntity<CommonApiResponse> customerOrder(int userId) throws ServiceNotFoundException {
 	    CommonApiResponse response = new CommonApiResponse();
-
+	    
 	    if (userId == 0) {
 	        response.setResponseMessage("bad request - missing field");
 	        response.setSuccess(false);
@@ -113,6 +115,8 @@ public class OrderResource {
 
 	    response.setResponseMessage("Your Order Placed, Order Id: " + orderId);
 	    response.setSuccess(true);
+	    
+	    
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

@@ -28,12 +28,13 @@ public class CartController {
 
 	@PostMapping("add")
 	public ResponseEntity<CommonApiResponse> add(@RequestBody AddToCartRequest addToCartRequest) {
-		return this.cartResource.add(addToCartRequest);
+		System.out.println("Quantity: " + addToCartRequest.getQuantity());
+		return this.cartResource.incrementQuantity(addToCartRequest);
 	}
 	
-	@PostMapping("/remove")
+	@PostMapping("remove")
     public ResponseEntity<CommonApiResponse> removeCartItem(@RequestBody AddToCartRequest removeCartItemRequest) {
-        return cartResource.removeCartItem(removeCartItemRequest.getUserId(), removeCartItemRequest.getProductId(), removeCartItemRequest.getQuantity());
+        return cartResource.decrementQuantity(removeCartItemRequest);
     }
 
 	@GetMapping("fetch")
@@ -41,11 +42,11 @@ public class CartController {
 		return this.cartResource.getCartDetailsByUserId(userId);
 	}
 	
-	@GetMapping("remove")
-	public ResponseEntity<CommonApiResponse> removeCartItem(@RequestParam("cartId") int cartId)
+	@GetMapping("delete")
+	public ResponseEntity<CommonApiResponse> deleteCartItem(@RequestParam("cartId") int cartId)
 			throws JsonProcessingException {
 
-		return this.cartResource.removeCartItem(cartId);
+		return this.cartResource.deleteCartItem(cartId);
 	}
 
 }

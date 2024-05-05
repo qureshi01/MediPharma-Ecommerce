@@ -4,6 +4,7 @@ import javax.management.ServiceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.example.resource.OrderResource;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("api/order/")
 public class OrderController {
 
