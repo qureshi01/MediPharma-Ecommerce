@@ -1,0 +1,156 @@
+.admin-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .management-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .management-item {
+    flex: 1;
+    margin-right: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .management-item h2 {
+    margin-top: 0;
+  }
+  
+  .management-item a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  
+  .management-item a:hover {
+    color: #666;
+  }
+  
+  .order-management button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .order-management button:hover {
+    background-color: #0056b3;
+  }
+  
+  .order-table {
+    margin-top: 20px;
+  }
+  
+  .order-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .order-table th, .order-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+  
+  .order-table th {
+    background-color: #f0f0f0;
+    text-align: left;
+  }
+  
+  .order-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+/* AddProductForm */
+
+.admin-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .product-management {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-management h2 {
+    margin-top: 0;
+  }
+  
+  .product-management input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .product-management button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .product-management button:hover {
+    background-color: #0056b3;
+  }
+
+/* ADDCATEGORYFORM */
+
+.admin-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .category-management {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .category-management h2 {
+    margin-top: 0;
+  }
+  
+  .category-management input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .category-management button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .category-management button:hover {
+    background-color: #218838;
+  }
+  
+
+  
+  
