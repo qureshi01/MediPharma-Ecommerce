@@ -4,15 +4,15 @@ This project is a simple e-commerce application built with React for the fronten
 MediPharma is a comprehensive online platform designed to provide users with convenient access to a wide range of medical products and supplies. Our goal is to empower individuals to manage their healthcare needs efficiently from the comfort of their homes.
 
 => Table of Contents
-Getting Started
-Prerequisites
-Installation
-Running the Application
-Usage
-Project Structure
-Technologies Used
-Contributing
-License
+1. Getting Started
+2. Prerequisites
+3. Installation
+4. Running the Application
+5. Usage
+6. Project Structure
+7. Technologies Used
+8. Contributing
+9. License
 
 =>Getting Started
 - Node.js and npm installed.
