@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ExploreMenu.css';
+import './CategoryMenu.css';
 import { Link } from 'react-router-dom';
 
 const ExploreMenu = ({ category, setCategory }) => {

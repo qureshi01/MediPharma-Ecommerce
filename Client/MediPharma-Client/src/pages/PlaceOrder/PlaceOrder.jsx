@@ -110,7 +110,7 @@ const PlaceOrder = () => {
             </div>
           </div>
           {/* Adjusted the button */}
-          <button onClick={() => handlePlaceOrder()}>PROCEED TO PAY</button>
+          <button onClick={() => handlePlaceOrder()}>PLACE YOUR ORDER</button>
         </div>
       </div>
     </div>

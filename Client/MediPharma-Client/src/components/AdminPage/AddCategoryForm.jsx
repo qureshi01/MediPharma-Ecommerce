@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AddCategoryForm = () => {
   const [categoryData, setCategoryData] = useState({
@@ -7,6 +8,29 @@ const AddCategoryForm = () => {
   });
 
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCookie = (name) => {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+          return cookieValue;
+        }
+      }
+      return null;
+    };
+  
+    const roleCookie = getCookie('role');
+
+  
+    console.log(roleCookie, "is role");
+  
+    if (roleCookie !== "admin") {
+      navigate("/");
+    }   
+  }, []); // <-- empty dependency array removed
 
   const handleChange = (e) => {
     const { name, value } = e.target;

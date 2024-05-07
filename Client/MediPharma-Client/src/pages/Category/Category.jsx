@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import './Category.css';
 import { useCartContext } from '../../context/CartContext';
 import CategoryProductTile from './CategoryProductTile';
-import FoodItem from '../../components/FoodItem/FoodItem';
+import FoodItem from '../../components/ProdItem/ProdItem';
 
 
 const CategoryById = ({ showLogin }) => {

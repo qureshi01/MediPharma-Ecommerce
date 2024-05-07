@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AdminPage.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AddProductForm = () => {
   const [productData, setProductData] = useState({
@@ -12,7 +13,48 @@ const AddProductForm = () => {
     image: ''
   });
 
+  const [categories, setCategories] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCookie = (name) => {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+          return cookieValue;
+        }
+      }
+      return null;
+    };
+  
+    const roleCookie = getCookie('role');
+
+  
+    console.log(roleCookie, "is role");
+  
+    if (roleCookie !== "admin") {
+      navigate("/");
+    }   
+  }, []); // <-- empty dependency array removed
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+        const response = await fetch('http://localhost:2399/api/product/category/all');
+        const data = await response.json();
+        setCategories(data.categories);
+        setIsLoading(false);
+    } catch (error) {
+        setError(error);
+        setIsLoading(false);
+    }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,13 +130,16 @@ const AddProductForm = () => {
           onChange={handleChange}
           placeholder="Enter discounted price"
         />
-        <input
-          type="number"
+        <select
           name="categoryId"
           value={productData.categoryId}
           onChange={handleChange}
-          placeholder="Enter category ID"
-        />
+        >
+          <option value="">Select Category</option>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>{category.title}</option>
+          ))}
+        </select>
         <input
           type="text"
           name="image"

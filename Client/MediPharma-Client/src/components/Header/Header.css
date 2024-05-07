@@ -7,12 +7,14 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    
 }
 
 .Header-Contents {
     max-width: 800px;
     padding: 0 20px;
     color: white;
+    padding-top: 60px;
 }
 
 .Header-Contents h2 {

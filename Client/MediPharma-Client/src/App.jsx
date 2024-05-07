@@ -9,8 +9,7 @@ import LoginPopup from './components/LoginPopUp/LoginPopup'
 import CategoryById from './pages/Category/Category'
 import { CartProvider } from './context/CartContext'
 import ThankYou from './pages/ThankYou/ThankYou'
-import FoodDisplay from './components/FoodDisplay/FoodDisplay'
-import FoodItem from './components/FoodItem/FoodItem'
+import FoodDisplay from './components/ProdDisplay/ProdDisplay'
 import MyOrders from './pages/MyOrders/MyOrders'
 import AdminPage from './components/AdminPage/AdminPage'
 import AddProductForm from './components/AdminPage/AddProductForm'
@@ -31,9 +30,9 @@ const App = () => {
         <Route path='/' element={<Home showLogin={showLogin} />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path="/add-product" element={<AddProductForm />} />
-        <Route path="/add-category" element={<AddCategoryForm />} /> // Add this route for AddCategoryForm
+        <Route path="/add-category" element={<AddCategoryForm />} /> 
 
-        <Route path="/product" element={<FoodItem/>} />
+        <Route path="/product" element={<FoodDisplay/>} />
         <Route path='/Cart' element={<Cart/>} />
         <Route path='/Order' element={<PlaceOrder/>} />
         <Route path="/Category/:categoryId" element={<CategoryById showLogin={showLogin}/>}  />

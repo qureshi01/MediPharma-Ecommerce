@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './FoodItem.css';
+import './ProdItem.css';
 import { useCartContext } from '../../context/CartContext';
 
 const FoodItem = ({showLogin , product}) => {

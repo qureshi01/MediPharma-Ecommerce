@@ -71,44 +71,64 @@
 
 /* AddProductForm */
 
+/* AdminPage.css */
+
 .admin-page {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .product-management {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-management h2 {
-    margin-top: 0;
-  }
-  
-  .product-management input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  
-  .product-management button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  .product-management button:hover {
-    background-color: #0056b3;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+}
+
+.product-management {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-management h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.product-management input[type="text"],
+.product-management input[type="number"],
+.product-management select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.product-management button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.product-management button:hover {
+  background-color: #0056b3;
+}
+
+.product-management p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #28a745; /* Success message color */
+}
+
+.product-management .error {
+  color: #dc3545; /* Error message color */
+  font-size: 16px;
+  margin-top: 10px;
+}
+
 
 /* ADDCATEGORYFORM */
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './FoodDisplay.css';
+import './ProdDisplay.css';
 import { StoreContext } from '../../context/StoreContext';
-import FoodItem from '../FoodItem/FoodItem';
+import FoodItem from '../ProdItem/ProdItem';
 import axios from 'axios'; // Import axios for making HTTP requests
 
 const FoodDisplay = ({ showLogin }) => {

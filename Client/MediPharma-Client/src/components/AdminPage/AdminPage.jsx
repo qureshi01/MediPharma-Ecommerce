@@ -1,10 +1,36 @@
 import React, { useState } from 'react';
 import './AdminPage.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const AdminPage = () => {
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
+  
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCookie = (name) => {
+      const cookies = document.cookie.split(';');
+      for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+          return cookieValue;
+        }
+      }
+      return null;
+    };
+  
+    const roleCookie = getCookie('role');
+
+  
+    console.log(roleCookie, "is role");
+  
+    if (roleCookie !== "admin") {
+      navigate("/");
+    }   
+  }, []); // <-- empty dependency array removed
+  
 
   const handleViewAllOrders = async () => {
     try {

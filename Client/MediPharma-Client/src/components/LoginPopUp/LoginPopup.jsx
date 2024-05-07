@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './LoginPopup.css';
 import { assets } from '../../assets/assets';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const LoginPopup = ({ setShowLogin }) => {
     const [currState, setCurrState] = useState("Login");
@@ -16,6 +17,7 @@ const LoginPopup = ({ setShowLogin }) => {
     const [loading, setLoading] = useState(false); // Add loading state
     const [error, setError] = useState(''); // Add error state
 
+    const navigate = useNavigate();
     const handleInputChange = (e, inputType) => {
         const value = e.target.value;
         switch (inputType) {
@@ -72,6 +74,10 @@ const LoginPopup = ({ setShowLogin }) => {
                     document.cookie = `firstName=${data.firstName}; path=/`; // Set firstName in cookie
                     document.cookie = `userId=${data.userId}; path=/`; // Set userId in cookie
                     setShowLogin(false); // Close the form
+
+                    console.log(data.role,"isRole");
+                    data.role === "admin" ?
+                    navigate("/admin"):navigate("/");
                 }
                 // Handle login success
             } catch (error) {
@@ -97,6 +103,10 @@ const LoginPopup = ({ setShowLogin }) => {
                     document.cookie = `firstName=${data.firstName}; path=/`; // Set firstName in cookie
                     document.cookie = `userId=${data.userId}; path=/`; // Set userId in cookie
                     setShowLogin(false); // Close the form
+
+                    console.log(data.role,"isRole");
+                    data.role === "admin" ?
+                    navigate("/admin"):navigate("/");
                 } else {
                     setLoading(false); // Set loading to false after signup error
                     setError(data.responseMessage); // Set error message
