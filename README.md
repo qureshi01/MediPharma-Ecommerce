@@ -1,6 +1,7 @@
-E-commerce Application Using React and Spring Boot
+**E-commerce Application Using React and Spring Boot**
 
 This project is a simple e-commerce application built with React for the frontend and Spring Boot for the backend. It allows you to manage a collection of items.
+MediPharma is a comprehensive online platform designed to provide users with convenient access to a wide range of medical products and supplies. Our goal is to empower individuals to manage their healthcare needs efficiently from the comfort of their homes.
 
 => Table of Contents
 Getting Started
@@ -20,10 +21,11 @@ A compatible database (e.g., MySQL, PostgreSQL) with schema created.
 
 => Installation
 -> Clone the repository:
-git clone https://github.com/qureshi01/MediPharma-Ecommerce
+`git clone https://github.com/qureshi01/MediPharma-Ecommerce`
 
 -> Install frontend dependencies:
-cd client npm install
+`cd client
+npm install`
 
 -> Configure the backend:
 Configure your database connection in application.properties. For example:
@@ -40,12 +42,13 @@ Specify other configurations like server port and logging as needed.
 cd server mvn clean install Running the Application
 
 -> Start the Spring Boot server:
-cd server mvn spring-boot:run
+cd server
+mvn spring-boot:run
 The backend server should now be running on http://localhost:2399.
 
 -> Start the React frontend:
 cd client 
-npm run dev
+`npm run dev`
 The React development server should start and open the application in your default web browser at http://localhost:5173.
 
 => Usage
