@@ -46,14 +46,18 @@ spring.datasource.password={your password}
 
 -> Build the Spring Boot project:
 
-cd server mvn clean install 
+`cd server` 
+
+`mvn clean install` 
 
 Running the Application
 
 -> Start the Spring Boot server:
 `cd server
-mvn spring-boot:run`
-The backend server should now be running on http://localhost:2399.
+`
+`mvn spring-boot:run
+`
+The backend server should now be running on `http://localhost:2399`.
 
 -> Start the React frontend:
 `cd client `
