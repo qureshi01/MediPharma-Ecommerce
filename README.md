@@ -91,17 +91,17 @@ Access the E-commerce application through the web browser. Perform login, regist
 
 => Technologies Used
 
-*** React ***
+***React***
 
-*** Spring Boot ***
+***Spring Boot***
 
-*** Java ***
+***Java***
 
-*** MySQL *** (or your preferred database)
+***MySQL*** (or your preferred database)
 
-*** npm ***
+***npm***
 
-*** Maven ***
+***Maven***
 
 
 => Contributing
