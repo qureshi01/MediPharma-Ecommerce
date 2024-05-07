@@ -20,6 +20,7 @@ MediPharma is a comprehensive online platform designed to provide users with con
 + A compatible database (e.g., MySQL, PostgreSQL) with schema created.
 
 => Installation
+
 -> Clone the repository:
 `git clone https://github.com/qureshi01/MediPharma-Ecommerce`
 
@@ -36,7 +37,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.username={your username}
 spring.datasource.password={your password}
 
-Specify other configurations like server port and logging as needed.
+-Specify other configurations like server port and logging as needed.
 
 -> Build the Spring Boot project:
 cd server mvn clean install Running the Application
