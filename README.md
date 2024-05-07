@@ -42,12 +42,12 @@ Specify other configurations like server port and logging as needed.
 cd server mvn clean install Running the Application
 
 -> Start the Spring Boot server:
-cd server
-mvn spring-boot:run
+`cd server
+mvn spring-boot:run`
 The backend server should now be running on http://localhost:2399.
 
 -> Start the React frontend:
-cd client 
+`cd client `
 `npm run dev`
 The React development server should start and open the application in your default web browser at http://localhost:5173.
 
