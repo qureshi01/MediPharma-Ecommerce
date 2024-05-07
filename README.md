@@ -59,14 +59,18 @@ Running the Application
 -> Start the Spring Boot server:
 `cd server
 `
+
 `mvn spring-boot:run
 `
+
 The backend server should now be running on `http://localhost:2399`.
 
 -> Start the React frontend:
 `cd client `
+
 `npm run dev`
-The React development server should start and open the application in your default web browser at http://localhost:5173.
+
+The React development server should start and open the application in your default web browser at` http://localhost:5173`.
 
 => Usage
 Access the E-commerce application through the web browser. Perform login, register, and all functions and check the changes in in database.
