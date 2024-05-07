@@ -21,16 +21,20 @@ MediPharma is a comprehensive online platform designed to provide users with con
 
 => Installation
 
+
 -> Clone the repository:
 `git clone https://github.com/qureshi01/MediPharma-Ecommerce`
+
 
 -> Install frontend dependencies:
 `cd client
 npm install`
 
+
 -> Configure the backend:
 
 Configure your database connection in application.properties. For example:
+
 
 -> MySQL Properties
 
