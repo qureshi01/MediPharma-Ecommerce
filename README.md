@@ -51,7 +51,6 @@ Configure your database connection in application.properties. For example:
 -> Build the Spring Boot project:
 
 `cd server` 
-
 `mvn clean install` 
 
 Running the Application
@@ -59,7 +58,6 @@ Running the Application
 -> Start the Spring Boot server:
 `cd server
 `
-
 `mvn spring-boot:run
 `
 
@@ -67,7 +65,6 @@ The backend server should now be running on `http://localhost:2399`.
 
 -> Start the React frontend:
 `cd client `
-
 `npm run dev`
 
 The React development server should start and open the application in your default web browser at` http://localhost:5173`.
