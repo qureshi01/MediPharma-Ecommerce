@@ -15,9 +15,9 @@ Contributing
 License
 
 =>Getting Started
-Node.js and npm installed.
-Java and Maven for Spring Boot.
-A compatible database (e.g., MySQL, PostgreSQL) with schema created.
+- Node.js and npm installed.
+* Java and Maven for Spring Boot.
++ A compatible database (e.g., MySQL, PostgreSQL) with schema created.
 
 => Installation
 -> Clone the repository:
