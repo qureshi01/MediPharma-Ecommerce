@@ -56,8 +56,8 @@ Access the E-commerce application through the web browser. Perform login, regist
 
 => Project Structure
 -> The project is structured as follows:
-client/: Contains the React frontend code. 
-server/: Contains the Spring Boot backend code.
+- client/: Contains the React frontend code. 
+* server/: Contains the Spring Boot backend code.
 
 => Technologies Used
 React
