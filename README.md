@@ -78,29 +78,39 @@ The React development server should start and open the application in your defau
 
 
 => Usage
+
 Access the E-commerce application through the web browser. Perform login, register, and all functions and check the changes in in database.
 
 
 => Project Structure
+
 -> The project is structured as follows:
 - `client/`: Contains the React frontend code. 
 * `server/`: Contains the Spring Boot backend code.
 
 
 => Technologies Used
+
 React
+
 Spring Boot
+
 Java
+
 MySQL (or your preferred database)
+
 npm
+
 Maven
 
 
 => Contributing
+
 Feel free to contribute to this project by opening issues or pull requests. Your contributions are welcome!
 
 
 => License
+
 This project is licensed under the MediPharma License - see the LICENSE file for details.
 
 Feel free to customize this README file to include specific details about your application, such as project features, API documentation, or any other relevant information. It's essential to provide clear and concise instructions to help users understand and use your application effectively.
