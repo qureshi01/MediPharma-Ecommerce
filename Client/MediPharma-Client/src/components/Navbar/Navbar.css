@@ -1,0 +1,209 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff; /* Change as per your design */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow if needed */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px; /* Adjust logo size as needed */
+    margin-right: 20px; /* Add margin as needed */
+}
+
+.navbar-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar-menu li a {
+    text-decoration: none;
+    color: #333; /* Change link color as needed */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+    color: #007bff; /* Change link color on hover */
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search {
+    margin-right: 20px; /* Add margin as needed */
+}
+
+.navbar-search img {
+    width: 20px; /* Adjust search icon size as needed */
+    cursor: pointer;
+}
+
+.navbar-cart {
+    margin-right: 20px; /* Add margin as needed */
+    position: relative;
+}
+
+.navbar-cart img {
+    width: 50px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.cart-symbol {
+    position: relative;
+}
+
+.cartNumber {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #007bff; /* Change background color as needed */
+    color: #fff; /* Change text color as needed */
+    font-size: 12px; /* Adjust font size as needed */
+    padding: 4px; /* Adjust padding as needed */
+    border-radius: 50%; /* Make it a circle */
+}
+
+.user-div {
+    display: flex;
+    align-items: center;
+}
+
+.user-div span {
+    margin-right: 10px; /* Add margin as needed */
+}
+
+.user-div button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #007bff; /* Change button color as needed */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.user-div button:hover {
+    color: #0056b3; /* Change button color on hover */
+}
+
+.sign-in-button {
+    background-color: #007bff; /* Blue background color */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding around text */
+    font-size: 16px; /* Font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.sign-in-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.order-nav {
+    margin-left: 20px;
+}
+
+.order-link {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    color: #007bff; /* Text color */
+    text-decoration: none;
+    font-weight: bold;
+    border: 2px solid #007bff; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+}
+
+.order-link:hover {
+    background-color: #007bff; /* Background color on hover */
+    color: #fff; /* Text color on hover */
+}
+
+
+
+
+/* Navbar CSS for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .navbar-left {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; /* Align items to the left */
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .navbar-menu {
+        display: none;
+        margin-bottom: 20px;
+    }
+
+    .navbar-right {
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* Add this to evenly distribute items */
+        align-items: center;
+    }
+
+    .navbar-search,
+    .navbar-cart,
+    .user-div {
+        margin-top: 20px;
+    }
+
+    .navbar-cart {
+        position: relative;
+        margin-left: auto; /* Move the cart to the right */
+    }
+
+    .cart-symbol {
+        display: flex;
+        align-items: center;
+    }
+
+    .cartNumber {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 12px;
+        padding: 4px;
+        border-radius: 50%;
+    }
+
+    .user-div button {
+        margin-top: 0; /* Remove previous margin */
+    }
+
+    .order-nav {
+        margin-bottom: 10px; /* Add margin between My Orders and the username */
+        margin-right: 20px; /* Adjust margin to align with search icon */
+    }
+}
+
+
+

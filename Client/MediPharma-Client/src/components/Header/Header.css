@@ -1,0 +1,58 @@
+.Header {
+    height: 70vh;
+    margin: 30px auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/header_img.png') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.Header-Contents {
+    max-width: 800px;
+    padding: 0 20px;
+    color: white;
+    padding-top: 60px;
+}
+
+.Header-Contents h2 {
+    font-weight: 600;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.Header-Contents p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.Header-Contents button {
+    border: 2px solid white;
+    color: white;
+    font-weight: 600;
+    padding: 15px 30px;
+    background-color: transparent;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.Header-Contents button:hover {
+    background-color: white;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .Header-Contents h2 {
+        font-size: 2.5rem;
+    }
+    .Header-Contents p {
+        font-size: 1rem;
+    }
+    .Header-Contents button {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,139 @@
+.prod-image{
+    height: 250px;
+    width:250px;
+}
+
+.cat-products{
+    display: flex;
+}
+
+/* .products-par{
+    display: flex;
+} */
+
+.products-par{
+    margin: 10px;
+    /* text-align: center; */
+    box-shadow: 2px 2px 2px #dadada;
+    padding: 10px;
+    position: relative;
+}
+
+.products-tile img{
+    object-fit: cover;
+}
+
+.prod-name{
+    font-size: 20px;
+    font-weight: 400;
+    /* color: #49557e; */
+    margin: 5px 0px;
+}
+
+.prod-price{
+    font-size: 16px;
+    color: #333;
+}
+
+.del{
+    font-size: 15px;
+    color: tomato;
+}
+
+.prod-star{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rating{
+    height: 20px;
+    width: 20px;
+}
+.save{
+    font-size: 15px;
+    color: #4646468f;
+}
+
+.prod-disc-price{
+    font-weight:500;
+    color: #49557e;
+    font-size: 20px;
+}
+
+.cat-name{
+    font-size: 24px;
+    text-decoration: underline;
+    columns: tomato;
+    margin-bottom: 25px;
+    margin-top: 25px;
+} 
+
+.food-item-counter {
+    bottom: unset !important;
+}
+
+.prod-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.remove-from-cart {
+    color: red;
+}
+
+.add-to-cart {
+    color: green;
+}
+
+.cart-quantity {
+    font-size: 18px;
+    margin: 0 5px;
+}
+
+.remove-from-cart {
+    background-color: red;
+    border: none;
+    color: #fff;
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    width: 30px; /* Adjust width */
+    height: 30px; /* Adjust height */
+    margin: 0 3px; /* Adjust margin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make it a circle */
+}
+
+.add-to-cart {
+    background-color: green;
+    border: none;
+    color: #fff;
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer;
+    width: 30px; /* Adjust width */
+    height: 30px; /* Adjust height */
+    margin: 0 3px; /* Adjust margin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Make it a circle */
+}
+
+.remove-from-cart:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.add-to-cart:hover {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
