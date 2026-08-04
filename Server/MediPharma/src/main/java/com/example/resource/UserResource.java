@@ -109,13 +109,17 @@ public class UserResource {
 	        response.setResponseMessage("User registered successfully");
 	        response.setSuccess(true);
 	        
-	        // Send registration success email
-	        SimpleMailMessage message = new SimpleMailMessage();
-	        message.setFrom("sender@gmail.com");
-	        message.setTo(user.getEmailId());
-	        message.setSubject("Registration Successful");
-	        message.setText("User Registered Successfully");
-	        mailSender.send(message);
+	        // Send registration success email (non-blocking if mail server is unreachable)
+	        try {
+	            SimpleMailMessage message = new SimpleMailMessage();
+	            message.setFrom("sender@gmail.com");
+	            message.setTo(user.getEmailId());
+	            message.setSubject("Registration Successful");
+	            message.setText("User Registered Successfully");
+	            mailSender.send(message);
+	        } catch (Exception mailEx) {
+	            System.err.println("Could not send registration email: " + mailEx.getMessage());
+	        }
 
 	        return new ResponseEntity<>(response, HttpStatus.OK);
 	    } catch (DataIntegrityViolationException e) {
